@@ -12,13 +12,6 @@ const Footer = () => {
           &copy; {new Date().getFullYear()} MyGroceryStore.com. All rights
           reserved.
         </Typography>
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          style={{ marginTop: "8px" }}
-        >
-          Crafted with ✨ by Sanya
-        </Typography>
       </div>
     </footer>
   );
