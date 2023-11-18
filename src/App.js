@@ -1,24 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Products from "./components/Products";
+import Contact from "./components/Contact";
+import ShoppingCart from "./components/ShoppingCart";
 
 function App() {
+  const [cart, setCart] = React.useState([]);
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
+  const removeFromCart = (index) => {
+    const newCart = [...cart];
+    newCart.splice(index, 1);
+    setCart(newCart);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <style>{`
+          body {
+            margin: 0;
+            padding: 0;
+          }
+        `}</style>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/products"
+            element={<Products addToCart={addToCart} />}
+          />
+          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/shopping-cart"
+            element={
+              <ShoppingCart cart={cart} removeFromCart={removeFromCart} />
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
